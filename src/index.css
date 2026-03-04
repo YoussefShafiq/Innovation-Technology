@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Brand Tokens — Change here to update the entire project ─────────────── */
+:root {
+  /* Primary – Orange */
+  --color-primary:       #F7941D;
+  --color-primary-light: #FBB55A;
+  --color-primary-dark:  #D97706;
+
+  /* Secondary – Deep Blue */
+  --color-secondary:       #2B3990;
+  --color-secondary-light: #4A5BC4;
+  --color-secondary-dark:  #1A2460;
+
+  /* Surfaces */
+  --color-background: #F8FAFC;
+  --color-surface:    #FFFFFF;
+
+  /* Text */
+  --color-text-primary:   #0F172A;
+  --color-text-secondary: #64748B;
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-text-primary font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+/* ─── Component Layer ─────────────────────────────────────────────────────── */
+@layer components {
+  /* Gradient text utility */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  }
+
+  /* Brand gradient background */
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 50%, var(--color-primary-dark) 100%);
+  }
+
+  /* Subtle hero gradient */
+  .bg-hero-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--color-secondary-dark)  0%,
+      var(--color-secondary)       45%,
+      #3D4FA8                      70%,
+      var(--color-primary-dark)   100%
+    );
+  }
+
+  /* Glass card effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+}
