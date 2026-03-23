@@ -1,18 +1,13 @@
 import { Link } from "react-router-dom";
-import {
-  MdCloudDone,
-  MdSecurity,
-  MdAutoGraph,
-} from "react-icons/md";
 import { HiArrowRight, HiCheckCircle } from "react-icons/hi";
 import Container from "../components/ui/Container";
 import Button from "../components/ui/Button";
-import Card from "../components/ui/Card";
 import SectionTitle from "../components/ui/SectionTitle";
-import { STATS, SERVICES } from "../constants/site";
-
-/* Icon map for the featured 3 services */
-const ICON_MAP = { MdCloudDone, MdSecurity, MdAutoGraph };
+import { ServiceCard, ServiceCardSkeleton } from "../components/ui/ServiceCard";
+import { API_URL } from "../constants/site";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 /* ─── Hero Section ───────────────────────────────────────────────────────── */
 const Hero = () => (
@@ -105,26 +100,67 @@ const Hero = () => (
 );
 
 /* ─── Stats Strip ────────────────────────────────────────────────────────── */
-const StatsSection = () => (
-  <section className="py-14 bg-surface border-y border-gray-100">
-    <Container>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        {STATS.map((stat) => (
-          <div key={stat.label} className="text-center">
-            <p className="text-4xl lg:text-5xl font-display font-extrabold text-primary leading-none mb-2">
-              {stat.value}
-            </p>
-            <p className="text-text-secondary text-sm font-medium">{stat.label}</p>
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
-);
+const STAT_LABELS = {
+  projects_delivered: {
+    label: "Projects Delivered",
+    symbol: '+',
+  },
+  client_satisfaction: {
+    label: "Client Satisfaction",
+    symbol: '%',
+  },
+  years_of_experience: {
+    label: "Years of Experience",
+    symbol: '+',
+  },
+  expert_engineers: {
+    label: "Expert Engineers",
+    symbol: '+',
+  }
+};
+
+const toTitleCase = (str) =>
+  str
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+const normalizeStats = (stats) => {
+  if (!stats) return [];
+  if (Array.isArray(stats)) return stats;
+  if (typeof stats === "object") {
+    return Object.entries(stats).map(([key, value]) => ({
+      label: STAT_LABELS[key].label || toTitleCase(key),
+      value,
+      symbol: STAT_LABELS[key].symbol,
+    }));
+  }
+  return [];
+};
+
+const StatsSection = ({ data }) => {
+  const stats = normalizeStats(data);
+
+  return (
+    <section className="py-14 bg-surface border-y border-gray-100">
+      <Container>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p className="text-4xl lg:text-5xl font-display font-extrabold text-primary leading-none mb-2">
+                {stat.value} {stat.symbol}
+              </p>
+              <p className="text-text-secondary text-sm font-medium">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+};
 
 /* ─── Services Preview ───────────────────────────────────────────────────── */
-const ServicesPreview = () => {
-  const featured = SERVICES.slice(0, 3);
+const ServicesPreview = ({ data, isLoading }) => {
+  const featured = (data || []).slice(0, 3);
 
   return (
     <section className="py-20 lg:py-28 bg-background">
@@ -137,43 +173,18 @@ const ServicesPreview = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {featured.map((service, i) => {
-            const Icon = ICON_MAP[service.icon];
-            return (
-              <Card key={service.id} className="flex flex-col gap-5">
-                {/* Icon badge */}
-                <div
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-md ${
-                    i % 2 === 0 ? "bg-primary/10" : "bg-secondary/10"
-                  }`}
-                >
-                  <Icon
-                    size={26}
-                    className={i % 2 === 0 ? "text-primary" : "text-secondary"}
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-display font-bold text-text-primary mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-text-secondary text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mt-auto pt-2">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-0.5 rounded-full bg-gray-100 text-text-secondary text-xs font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </Card>
-            );
-          })}
+          {isLoading
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <ServiceCardSkeleton key={`home-service-skeleton-${index}`} />
+              ))
+            : featured.map((service, i) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  index={i}
+                  showLearnMore={false}
+                />
+              ))}
         </div>
 
         <div className="text-center mt-12">
@@ -224,13 +235,26 @@ const CtaBanner = () => (
 );
 
 /* ─── Page ───────────────────────────────────────────────────────────────── */
-const Home = () => (
-  <>
-    <Hero />
-    <StatsSection />
-    <ServicesPreview />
-    <CtaBanner />
-  </>
-);
+const Home = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['home'],
+    queryFn: () => {
+      return axios.get(`${API_URL}/home`)
+    },
+  })
 
+  if (error) {
+    toast.error(error?.message || 'Something went wrong');
+  };
+
+  return (
+    <>
+      <Hero />
+      <StatsSection data={data?.data?.data?.stats} />
+      <ServicesPreview data={data?.data?.data?.services} isLoading={isLoading} />
+      <CtaBanner />
+    </>
+  );
+
+};
 export default Home;

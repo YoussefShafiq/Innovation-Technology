@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { HiMail, HiPhone, HiLocationMarker, HiCheckCircle } from "react-icons/hi";
 import { MdSend } from "react-icons/md";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
 import Container from "../components/ui/Container";
 import SectionTitle from "../components/ui/SectionTitle";
 import Card from "../components/ui/Card";
 import Button from "../components/ui/Button";
-import { CONTACT_INFO } from "../constants/site";
+import { API_URL, CONTACT_INFO } from "../constants/site";
 
 /* ─── Contact info card ──────────────────────────────────────────────────── */
 const InfoItem = ({ icon: Icon, label, value, href }) => (
@@ -27,22 +30,46 @@ const InfoItem = ({ icon: Icon, label, value, href }) => (
 );
 
 /* ─── Contact Form ───────────────────────────────────────────────────────── */
+/* POST body matches Public → Contact Submit in innovation-tech.json */
 const ContactForm = () => {
-  const [form, setForm]       = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: (body) =>
+      axios.post(`${API_URL}/contact`, body, {
+        headers: { "Content-Type": "application/json" },
+      }),
+  });
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    /* Simulate async submit */
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1200);
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      subject: form.subject.trim() || "General Inquiry",
+      message: form.message.trim(),
+    };
+
+    toast.promise(mutateAsync(payload), {
+      loading: "Sending your message...",
+      success: (res) => {
+        setSubmitted(true);
+        return (
+          res?.data?.message ||
+          res?.data?.data?.message ||
+          "Thanks — we'll get back to you within 24 business hours."
+        );
+      },
+      error: (err) =>
+        err?.response?.data?.message ||
+        err?.response?.data?.errors?.[0] ||
+        err?.message ||
+        "Failed to send. Please try again.",
+    });
   };
 
   if (submitted) {
@@ -126,10 +153,10 @@ const ContactForm = () => {
         type="submit"
         variant="primary"
         size="lg"
-        disabled={loading}
+        disabled={isPending}
         className="w-full sm:w-auto self-start group"
       >
-        {loading ? (
+        {isPending ? (
           <>
             <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="white" strokeWidth="4" />

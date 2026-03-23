@@ -1,28 +1,14 @@
 import { Link } from "react-router-dom";
-import {
-  MdCloudDone,
-  MdSecurity,
-  MdAutoGraph,
-  MdDevices,
-  MdIntegrationInstructions,
-  MdSupportAgent,
-} from "react-icons/md";
 import { HiArrowRight, HiCheckCircle } from "react-icons/hi";
 import Container from "../components/ui/Container";
 import SectionTitle from "../components/ui/SectionTitle";
 import Card from "../components/ui/Card";
 import Button from "../components/ui/Button";
-import { SERVICES } from "../constants/site";
-
-/* Icon lookup map */
-const ICONS = {
-  MdCloudDone,
-  MdSecurity,
-  MdAutoGraph,
-  MdDevices,
-  MdIntegrationInstructions,
-  MdSupportAgent,
-};
+import { ServiceCard, ServiceCardSkeleton } from "../components/ui/ServiceCard";
+import { API_URL } from "../constants/site";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 /* ─── Page Hero ──────────────────────────────────────────────────────────── */
 const PageHero = () => (
@@ -47,63 +33,11 @@ const PageHero = () => (
   </section>
 );
 
-/* ─── Service card ───────────────────────────────────────────────────────── */
-const ServiceCard = ({ service, index }) => {
-  const Icon = ICONS[service.icon];
-  const isEven = index % 2 === 0;
-
-  return (
-    <Card className="flex flex-col gap-5 h-full">
-      {/* Icon */}
-      <div
-        className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-md ${
-          isEven ? "bg-primary/10" : "bg-secondary/10"
-        }`}
-      >
-        <Icon size={26} className={isEven ? "text-primary" : "text-secondary"} />
-      </div>
-
-      {/* Content */}
-      <div className="flex-1">
-        <h3 className="text-xl font-display font-bold text-text-primary mb-2">
-          {service.title}
-        </h3>
-        <p className="text-text-secondary text-sm leading-relaxed">
-          {service.description}
-        </p>
-      </div>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2">
-        {service.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-2.5 py-0.5 rounded-full bg-gray-100 text-text-secondary text-xs font-medium"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {/* Learn more link */}
-      <Link
-        to="/contact"
-        className={`flex items-center gap-1.5 text-sm font-semibold group ${
-          isEven ? "text-primary" : "text-secondary"
-        }`}
-      >
-        Learn More
-        <HiArrowRight className="group-hover:translate-x-1 transition-transform duration-200" size={15} />
-      </Link>
-    </Card>
-  );
-};
-
 /* ─── Process Section ────────────────────────────────────────────────────── */
 const steps = [
-  { num: "01", title: "Discovery",   desc: "We deep-dive into your business goals, tech stack, and challenges to define a clear problem statement." },
-  { num: "02", title: "Strategy",    desc: "Our architects design a tailored solution roadmap with clear milestones, timelines, and success metrics." },
-  { num: "03", title: "Build",       desc: "Agile sprints, continuous integration, and regular demos keep you in the loop at every stage." },
+  { num: "01", title: "Discovery", desc: "We deep-dive into your business goals, tech stack, and challenges to define a clear problem statement." },
+  { num: "02", title: "Strategy", desc: "Our architects design a tailored solution roadmap with clear milestones, timelines, and success metrics." },
+  { num: "03", title: "Build", desc: "Agile sprints, continuous integration, and regular demos keep you in the loop at every stage." },
   { num: "04", title: "Launch & Grow", desc: "We deploy, monitor, and support your solution — then help you scale as your business evolves." },
 ];
 
@@ -177,8 +111,8 @@ const WhyUs = () => (
         <div className="flex flex-col gap-4">
           {[
             { label: "Average Project ROI", value: "340%", sub: "Based on 2023 client surveys" },
-            { label: "On-time Delivery Rate", value: "96%",  sub: "Across all project types" },
-            { label: "Client Retention Rate", value: "89%",  sub: "Clients return for more projects" },
+            { label: "On-time Delivery Rate", value: "96%", sub: "Across all project types" },
+            { label: "Client Retention Rate", value: "89%", sub: "Clients return for more projects" },
           ].map((item, i) => (
             <Card
               key={item.label}
@@ -201,30 +135,51 @@ const WhyUs = () => (
 );
 
 /* ─── Page ───────────────────────────────────────────────────────────────── */
-const Services = () => (
-  <>
-    <PageHero />
+const Services = () => {
 
-    {/* Services grid */}
-    <section className="py-20 lg:py-28 bg-background">
-      <Container>
-        <SectionTitle
-          tag="All Services"
-          title="Everything You Need to Succeed"
-          subtitle="Comprehensive technology services that cover the entire digital lifecycle of your business."
-          className="mb-14"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {SERVICES.map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} />
-          ))}
-        </div>
-      </Container>
-    </section>
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["services"],
+    queryFn: () => {
+      return axios.get(`${API_URL}/services`);
+    },
+  });
 
-    <Process />
-    <WhyUs />
-  </>
-);
+  const services = Array.isArray(data?.data?.data) ? data.data.data : [];
+
+  if (error) {
+    toast.error(error?.message || 'Something went wrong');
+  }
+
+
+  return (
+    <>
+      <PageHero />
+
+      {/* Services grid */}
+      <section className="py-20 lg:py-28 bg-background">
+        <Container>
+          <SectionTitle
+            tag="All Services"
+            title="Everything You Need to Succeed"
+            subtitle="Comprehensive technology services that cover the entire digital lifecycle of your business."
+            className="mb-14"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {isLoading
+              ? Array.from({ length: 6 }).map((_, index) => (
+                <ServiceCardSkeleton key={`service-skeleton-${index}`} />
+              ))
+              : services.map((service, i) => (
+                <ServiceCard key={service.id} service={service} index={i} />
+              ))}
+          </div>
+        </Container>
+      </section>
+
+      <Process />
+      <WhyUs />
+    </>
+  );
+};
 
 export default Services;
