@@ -1,0 +1,387 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "team": "Our Team"
+  },
+  "common": {
+    "read_more": "Read More",
+    "send_message": "Send Message",
+    "get_in_touch": "Get in Touch",
+    "sending": "Sending...",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "learn_more": "Learn More",
+    "view_details": "View details",
+    "toggle_menu": "Toggle menu"
+  },
+  "footer": {
+    "description": "Innovation Technology — your one-call partner for hardware, software, and IT operations across Egypt and the MENA region.",
+    "quick_links": "Quick Links",
+    "contact_us": "Contact Us",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "home": {
+    "hero": {
+      "badge": "Since 2012 · SMEs & enterprises in MENA",
+      "badge_secondary": "Cloud · Security · Data center · VoIP",
+      "title_part1": "Technology That",
+      "title_part2": "Your Business",
+      "hero_words": [
+        "Powers",
+        "Accelerates",
+        "Secures",
+        "Transforms",
+        "Automates",
+        "Optimizes",
+        "Scales",
+        "Innovates"
+      ],
+      "description": "Innovation Technology is your single point of contact for hardware, software, maintenance, and modern IT services — from Microsoft cloud and security to data center and voice — with clear scope, vendor-neutral advice, and delivery you can run after go-live.",
+      "straight_quotes": "straight quotes",
+      "cta_primary": "Explore Services",
+      "cta_secondary": "Learn About Us",
+      "trust": {
+        "iso_certified": "Microsoft ecosystem depth",
+        "uptime_sla": "Defense-in-depth security",
+        "support_24": "End-to-end IT lifecycle"
+      }
+    },
+    "services": {
+      "tag": "What We Do",
+      "title": "Solutions Built for Scale",
+      "subtitle": "From cloud infrastructure to AI-powered analytics — we cover every layer of your technology stack.",
+      "cta": "View All Services"
+    },
+    "cta": {
+      "title": "Ready to Transform Your Business?",
+      "description": "Tell us about your environment — we'll help you choose the right stack, rollout plan, and support model.",
+      "primary": "Start a Project",
+      "secondary": "About Innovation Technology"
+    },
+    "partners": {
+      "tag": "Partners",
+      "title": "Organizations that trust us",
+      "subtitle": "A snapshot of the industries and businesses we support — from finance and healthcare to logistics and the public sector."
+    },
+    "about_strip": {
+      "who_tag": "Who we are",
+      "title": "Your one-call partner for hardware, software & IT operations",
+      "p1": "IN Tech helps SMEs and enterprises start, maintain, and upgrade IT services with a professional team — from modern infrastructure and cloud to security and day-to-day operations.",
+      "bullets": [
+        "End-to-end delivery: advisory, implementation, and support",
+        "Vendor-neutral guidance focused on fit, performance, and cost",
+        "Regional experience across regulated and high-availability environments"
+      ],
+      "cta": "Read our story",
+      "card_badge": "Structured delivery. Clear ownership. Measurable outcomes.",
+      "card_p": "Whether you are modernizing legacy systems or scaling a new platform, we align technology decisions with business priorities — so investments translate into uptime, security, and speed."
+    },
+    "why": {
+      "tag": "Why IN Tech",
+      "title": "A partner you can run with — not just buy from",
+      "subtitle": "We combine deep technical execution with pragmatic planning, so projects ship on time and stay healthy in production.",
+      "items": [
+        {
+          "title": "Built for real operations",
+          "desc": "We design solutions that stay maintainable after go-live — documentation, monitoring, and handover included."
+        },
+        {
+          "title": "Security-first mindset",
+          "desc": "From identity to infrastructure, we treat resilience and compliance as part of the architecture — not an afterthought."
+        },
+        {
+          "title": "Support that shows up",
+          "desc": "A responsive team for incidents, changes, and continuous improvement — with clear SLAs and ownership."
+        },
+        {
+          "title": "Best solution, best price",
+          "desc": "We optimize for total value — fair pricing, clear options, and no junk add-ons bundled in at the last minute."
+        }
+      ]
+    },
+    "fulfillment": {
+      "tag": "Fulfillment",
+      "title": "Box movers: hardware delivered the way you'd expect retail — clean, complete, no surprise add-ons",
+      "p1": "When you order laptops, desktops, or appliances through us, we treat fulfillment like moving a sealed product: tracked logistics, careful handover, and a quote that isn't padded with optional bundles nobody asked for. You get the right device, configured to your policy — without competitors' \"extras\" stacked on top.",
+      "bullets": [
+        "Sealed-box delivery where it matters — e.g. laptops ready for your imaging policy",
+        "Straight quotes: what you approve is what ships (no hidden line items)",
+        "Optional services are explicit — never smuggled in as mandatory add-ons"
+      ],
+      "cta": "Ask about hardware fulfillment",
+      "card1_title": "Sealed SKU, verified config",
+      "card1_sub": "Asset-tagged and aligned to your standards.",
+      "card2_title": "Tracked movement",
+      "card2_sub": "From dock to desk — visibility you can plan around.",
+      "footer_note": "No forced bundles · Best solution · Best price"
+    },
+    "process": {
+      "tag": "How we work",
+      "title": "A calm, transparent delivery rhythm",
+      "subtitle": "No mystery phases — just a clear path from first workshop to steady-state operations.",
+      "steps": [
+        {
+          "n": "01",
+          "title": "Discover",
+          "desc": "We align on goals, constraints, and success metrics — then map your current stack and risks."
+        },
+        {
+          "n": "02",
+          "title": "Design",
+          "desc": "Architecture, security model, and a phased rollout plan — with clear milestones and ownership."
+        },
+        {
+          "n": "03",
+          "title": "Deliver",
+          "desc": "Implementation with controlled changes, validation, and knowledge transfer to your teams."
+        },
+        {
+          "n": "04",
+          "title": "Evolve",
+          "desc": "Monitoring, optimization, and continuous improvements as your business scales."
+        }
+      ]
+    },
+    "pillars": {
+      "tag": "Core expertise",
+      "title": "Coverage across the stack",
+      "subtitle": "The same pillars that anchor our company profile — expressed as outcomes you can measure: uptime, security posture, and operational agility.",
+      "items": [
+        {
+          "title": "Cloud & Microsoft 365",
+          "desc": "Azure and Microsoft 365 adoption, migration, and governance — without throwing away existing investments."
+        },
+        {
+          "title": "Cyber security",
+          "desc": "Network security, endpoints, encryption, and monitoring — built from leading vendor ecosystems."
+        },
+        {
+          "title": "Data center",
+          "desc": "Servers, storage, networking, virtualization, and resilience for high-availability environments."
+        },
+        {
+          "title": "Voice (VoIP)",
+          "desc": "Modern telephony that fits your workflows — hardware and software options for real business needs."
+        }
+      ],
+      "cta": "Explore services"
+    },
+    "testimonials": {
+      "tag": "What clients say",
+      "title": "Outcomes you can feel in day-to-day operations",
+      "subtitle": "A few themes we hear consistently after delivery: clarity, stability, and teams that regain confidence in their systems.",
+      "quotes": [
+        {
+          "quote": "They didn't just deploy tools — they helped us design a roadmap we could actually maintain. Our incident volume dropped within weeks.",
+          "name": "Head of IT Operations",
+          "org": "Regional enterprise"
+        },
+        {
+          "quote": "Clear ownership, crisp communication, and strong follow-through. The security work was thorough without slowing delivery.",
+          "name": "IT Director",
+          "org": "Financial services"
+        },
+        {
+          "quote": "We finally have a partner that connects infrastructure decisions to business outcomes — not just tickets and tasks.",
+          "name": "COO",
+          "org": "Mid-sized services company"
+        }
+      ]
+    }
+  },
+  "about": {
+    "breadcrumb": "About Us",
+    "hero_title_fallback": "Innovation Technology",
+    "hero_subtitle_fallback": "Your one-call source for hardware, software, maintenance, and IT operations for SMEs and enterprises.",
+    "mission": { "label": "Our Mission" },
+    "vision": { "label": "Our Vision" },
+    "story": {
+      "tag_fallback": "Our Story",
+      "title_fallback": "Built on Trust, Driven by Results",
+      "cta": "Work With Us"
+    },
+    "stats": {
+      "years_label": "Years of Excellence",
+      "projects_delivered": "Projects Delivered",
+      "client_satisfaction": "Client Satisfaction",
+      "years_of_experience": "Years of Experience",
+      "expert_engineers": "Expert Engineers"
+    },
+    "values": {
+      "tag": "Our Values",
+      "title": "The Principles We Live By",
+      "subtitle": "The commitments that shape how we engage clients, vendors, and each other — every day.",
+      "items": [
+        {
+          "title": "Innovation",
+          "description": "We continuously adopt practical advances that improve outcomes — not hype for its own sake."
+        },
+        {
+          "title": "Commitment",
+          "description": "We stay accountable from first scope discussion through steady-state operations and support."
+        },
+        {
+          "title": "Trust",
+          "description": "Transparent recommendations and predictable delivery build relationships that last years."
+        },
+        {
+          "title": "Integrity",
+          "description": "We align solutions with real requirements — fit, security, and value over easy shelf-ware."
+        },
+        {
+          "title": "Respect",
+          "description": "We value your time, your policies, and your teams; collaboration is never one‑sided."
+        },
+        {
+          "title": "Quality",
+          "description": "Engineering discipline, careful testing, and clean handover reduce surprises after go‑live."
+        },
+        {
+          "title": "Family",
+          "description": "A people-first culture that stresses teamwork, empathy, and shared ownership of outcomes."
+        }
+      ]
+    },
+    "clutch": { "title": "Established 2012", "label": "Headquartered in 6th of October, Giza" },
+    "team": {
+      "tag": "Our Team",
+      "title": "The People Behind the Work",
+      "subtitle": "World-class engineers, designers, and strategists united by a passion for building things that matter."
+    }
+  },
+  "services": {
+    "hero": {
+      "tag": "What We Offer",
+      "title": "Our Services",
+      "description": "End-to-end technology services designed to accelerate your digital transformation and deliver measurable business outcomes."
+    },
+    "grid": {
+      "tag": "All Services",
+      "title": "Everything You Need to Succeed",
+      "subtitle": "Comprehensive technology services that cover the entire digital lifecycle of your business."
+    },
+    "profile_pillars": {
+      "tag": "Core Expertise",
+      "title": "Service Pillars from IN Tech Profile",
+      "subtitle": "These are the foundation of our portfolio as outlined in the official company profile.",
+      "items": [
+        {
+          "title": "Cloud Solutions",
+          "desc": "Design, deployment, and migration for Microsoft-based cloud environments including Azure and Microsoft 365, without wasting your existing on‑premises investments.",
+          "tag": "IaaS / PaaS / SaaS"
+        },
+        {
+          "title": "Cyber Security",
+          "desc": "End‑to‑end protection for your network, endpoints, and data with leading vendors — including firewalls, UTM, encryption, web filtering, IDS/IPS, and more.",
+          "tag": "Protection & Compliance"
+        },
+        {
+          "title": "Data Center",
+          "desc": "Complete datacenter solutions covering networking, servers, SAN & NAS storage, load balancing, power, and virtualization for high‑availability environments.",
+          "tag": "Infrastructure"
+        },
+        {
+          "title": "Voice over IP (VoIP)",
+          "desc": "Modern IP telephony platforms that replace legacy systems with flexible, cost‑effective voice solutions tailored to your organization.",
+          "tag": "Unified Communication"
+        }
+      ]
+    },
+    "process": {
+      "tag": "How We Work",
+      "title": "Our Proven Process",
+      "subtitle": "A structured, transparent approach that delivers on time, on budget, and beyond expectations.",
+      "step1": {
+        "title": "Discovery",
+        "desc": "We deep-dive into your business goals, tech stack, and challenges to define a clear problem statement."
+      },
+      "step2": {
+        "title": "Strategy",
+        "desc": "Our architects design a tailored solution roadmap with clear milestones, timelines, and success metrics."
+      },
+      "step3": {
+        "title": "Build",
+        "desc": "Agile sprints, continuous integration, and regular demos keep you in the loop at every stage."
+      },
+      "step4": {
+        "title": "Launch & Grow",
+        "desc": "We deploy, monitor, and support your solution — then help you scale as your business evolves."
+      }
+    },
+    "why": {
+      "tag": "Why Choose Us",
+      "title": "The Difference is in the Details",
+      "subtitle": "We don't just deliver software — we become your technology partner for the long haul.",
+      "point1": "Dedicated project manager from day one",
+      "point2": "Weekly progress reports & demos",
+      "point3": "Source code ownership — always yours",
+      "point4": "Post-launch support & maintenance",
+      "point5": "Flexible engagement models",
+      "point6": "NDA & data privacy guaranteed",
+      "cta": "Start a Conversation",
+      "roi": "Average Project ROI",
+      "roi_sub": "Based on 2023 client surveys",
+      "delivery": "On-time Delivery Rate",
+      "delivery_sub": "Across all project types",
+      "retention": "Client Retention Rate",
+      "retention_sub": "Clients return for more projects"
+    }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Get in Touch",
+      "title": "Let's Talk",
+      "description": "Have a project in mind? A challenge to solve? Or just want to explore what's possible? We'd love to hear from you."
+    },
+    "info": {
+      "tag": "Contact Info",
+      "title": "We're Here to Help",
+      "subtitle": "Reach out through any channel — our team typically responds within a few hours.",
+      "email_label": "Email",
+      "phone_label": "Phone",
+      "office_label": "Office"
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "subtitle": "Fill out the form and we'll get back to you shortly.",
+      "name_label": "Full Name",
+      "name_placeholder": "John Doe",
+      "email_label": "Email Address",
+      "email_placeholder": "john@company.com",
+      "subject_label": "Subject",
+      "subject_placeholder": "How can we help you?",
+      "message_label": "Message",
+      "message_placeholder": "Tell us about your project or challenge...",
+      "sent_title": "Message Sent!",
+      "sent_desc": "Thank you for reaching out. We'll get back to you within 24 business hours.",
+      "send_another": "Send Another",
+      "sending": "Sending your message...",
+      "sending_btn": "Sending...",
+      "submit": "Send Message",
+      "success_toast": "Thanks — we'll get back to you within 24 business hours.",
+      "error_toast": "Failed to send. Please try again.",
+      "subject_default": "General Inquiry"
+    }
+  },
+  "service_detail": {
+    "not_found": "Service not found",
+    "back": "Back to services",
+    "breadcrumb": "Services",
+    "expect_title": "What you can expect",
+    "tech_title": "Technologies & tags",
+    "side_text": "Ready to go deeper on scope, timeline, and pricing? Send us a short note — we'll respond with next steps.",
+    "discuss": "Discuss this service",
+    "all_services": "← All services",
+    "default_highlights": [
+      "Discovery workshop to align goals, constraints, and success metrics",
+      "Phased delivery with demos — you stay in control at every milestone",
+      "Documentation, handover, and optional ongoing support under clear SLAs"
+    ]
+  }
+}

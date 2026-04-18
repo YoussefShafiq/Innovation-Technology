@@ -1,48 +1,58 @@
 import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
 import Container from "../ui/Container";
 import Button from "../ui/Button";
 import { NAV_LINKS, SITE_NAME } from "../../constants/site";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen]       = useState(false);
-  const [scrolled, setScrolled]   = useState(false);
+  const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  /* Shadow on scroll */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Close menu on route change */
   const handleClose = () => setIsOpen(false);
 
-  const activeLinkClass = ({ isActive }) =>
-    [
-      "relative text-sm font-semibold transition-colors duration-200 pb-0.5",
+  /** Over dark hero (transparent top bar): light text. After scroll: dark text on solid surface. */
+  const activeLinkClass = ({ isActive }) => {
+    if (scrolled) {
+      return [
+        "relative text-sm font-semibold transition-colors duration-200 pb-0.5",
+        "after:absolute after:bottom-0 after:left-0 after:h-0.5 after:rounded-full",
+        "after:transition-all after:duration-300",
+        isActive
+          ? "text-primary after:w-full after:bg-primary"
+          : "text-text-primary hover:text-primary after:w-0 hover:after:w-full after:bg-primary",
+      ].join(" ");
+    }
+    return [
+      "relative text-sm font-semibold transition-colors duration-200 pb-0.5 drop-shadow-sm",
       "after:absolute after:bottom-0 after:left-0 after:h-0.5 after:rounded-full",
       "after:transition-all after:duration-300",
       isActive
         ? "text-primary after:w-full after:bg-primary"
-        : "text-text-primary hover:text-primary after:w-0 hover:after:w-full after:bg-primary",
+        : "text-white/90 hover:text-white after:w-0 hover:after:w-full after:bg-white/80",
     ].join(" ");
+  };
 
   return (
     <header
       className={[
         "fixed top-0 inset-x-0 z-50 backdrop-blur-md",
-        "transition-[background-color,box-shadow,border-color] duration-300",
+        "transition-[background-color,box-shadow,border-color,color] duration-300",
         scrolled
           ? "bg-surface/95 shadow-soft border-b border-gray-100/80"
-          : "bg-transparent border-b border-transparent",
+          : "bg-slate-950/25 border-b border-white/10 supports-[backdrop-filter]:bg-slate-950/20",
       ].join(" ")}
     >
       <Container>
         <nav className="flex items-center justify-between h-18 py-4">
-
-          {/* Logo */}
           <Link
             to="/"
             onClick={handleClose}
@@ -62,43 +72,49 @@ const Navbar = () => {
               </svg>
             </span>
             <span className="text-xl font-display font-bold">
-              <span className="text-secondary">{SITE_NAME.first}</span>
+              <span className={scrolled ? "text-secondary" : "text-white drop-shadow-sm"}>
+                {SITE_NAME.first}
+              </span>
               <span className="text-primary">{SITE_NAME.second}</span>
             </span>
           </Link>
 
-          {/* Desktop Links */}
           <ul className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <li key={link.path}>
                 <NavLink to={link.path} className={activeLinkClass}>
-                  {link.label}
+                  {t(link.label)}
                 </NavLink>
               </li>
             ))}
           </ul>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
             <Button size="sm" variant="primary" as={Link} onClick={() => {}}>
               <Link to="/contact" className="text-white font-semibold">
-                Get in Touch
+                {t("common.send_message")}
               </Link>
             </Button>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden p-2 rounded-lg text-text-primary hover:bg-gray-100 transition-colors"
-            onClick={() => setIsOpen((prev) => !prev)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-          </button>
+          <div className="flex md:hidden items-center gap-3">
+            <button
+              type="button"
+              className={[
+                "p-2 rounded-lg transition-colors",
+                scrolled
+                  ? "text-text-primary hover:bg-gray-100"
+                  : "text-white hover:bg-white/10 drop-shadow-sm",
+              ].join(" ")}
+              onClick={() => setIsOpen((prev) => !prev)}
+              aria-label={t("common.toggle_menu")}
+            >
+              {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            </button>
+          </div>
         </nav>
       </Container>
 
-      {/* Mobile Slide Menu */}
       <div
         className={[
           "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
@@ -121,7 +137,7 @@ const Navbar = () => {
                     ].join(" ")
                   }
                 >
-                  {link.label}
+                  {t(link.label)}
                 </NavLink>
               </li>
             ))}
@@ -132,7 +148,7 @@ const Navbar = () => {
               onClick={handleClose}
               className="block w-full text-center bg-primary text-white font-semibold py-3 px-6 rounded-xl hover:bg-primary-dark transition-colors duration-200"
             >
-              Get in Touch
+              {t("common.send_message")}
             </Link>
           </div>
         </div>

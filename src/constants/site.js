@@ -1,80 +1,76 @@
 /* ─── Site-wide constants ──────────────────────────────────────────────────── */
-export const API_URL = 'https://api.xeron.tech/api/public'
-export const BASE_URL = 'https://api.xeron.tech'
+const API_ORIGIN = (import.meta.env.VITE_API_URL ?? 'https://api.xeron.tech').replace(/\/$/, '')
+
+export const API_URL = `${API_ORIGIN}/api/public`
+export const BASE_URL = API_ORIGIN
 
 export const SITE_NAME = {
   first: "Innovation",
-  second: " Tech",
+  second: "Technology",
 };
 
 export const NAV_LINKS = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Services", path: "/services" },
-  { label: "Contact", path: "/contact" },
+  { label: "nav.home", path: "/" },
+  { label: "nav.about", path: "/about" },
+  { label: "nav.services", path: "/services" },
+  { label: "nav.contact", path: "/contact" },
 ];
 
 export const CONTACT_INFO = {
-  address: "123 Innovation Drive, Tech City, CA 94016",
-  phone: "+1 (555) 123-4567",
-  email: "hello@innovationtech.com",
+  address:
+    "3 City Stars Towers, Central Axis (El Mehwar Elmarkazy), 2nd Floor, Office 20, 6th of October City, Giza, Egypt",
+  phone: "+20 2 38244418 · +20 109 566 2005 · +20 103 375 9080",
+  phoneTel: "+20238244418",
+  email: "ahmed.gamal@in-technology.info",
 };
 
+/** Fallback cards when API list is unavailable — aligned with Innovation Technology service pillars */
 export const SERVICES = [
   {
     id: 1,
-    icon: "MdCloudDone",
-    title: "Cloud Solutions",
-    description: "Scalable, secure cloud infrastructure tailored to your business needs — from migration to full cloud-native architecture.",
-    tags: ["AWS", "Azure", "GCP"],
+    icon: "MdDevices",
+    title: "End-user computing & hardware",
+    description:
+      "Desktops, notebooks, and thin clients matched to policy, performance, and lifecycle needs.",
+    tags: ["Endpoints", "Procurement"],
   },
   {
     id: 2,
-    icon: "MdSecurity",
-    title: "Cybersecurity",
-    description: "Protect your assets with enterprise-grade security audits, threat detection, and 24/7 monitoring services.",
-    tags: ["SOC 2", "ISO 27001", "Zero Trust"],
+    icon: "MdCloudDone",
+    title: "Cloud, Microsoft 365 & Azure",
+    description:
+      "Azure and Microsoft 365 adoption with hybrid-aware planning — without throwing away prior investments.",
+    tags: ["Azure", "M365"],
   },
   {
     id: 3,
-    icon: "MdAutoGraph",
-    title: "AI & Analytics",
-    description: "Transform raw data into actionable insights with our machine learning models and business intelligence dashboards.",
-    tags: ["ML", "BI", "Data Pipelines"],
+    icon: "MdSecurity",
+    title: "Cyber security",
+    description:
+      "Layered defenses from perimeter to endpoint — firewalls, encryption, web filtering, IDS/IPS, and more.",
+    tags: ["Defense in depth"],
   },
   {
     id: 4,
-    icon: "MdDevices",
-    title: "Web & Mobile Dev",
-    description: "High-performance, pixel-perfect web and mobile applications built with modern stacks and best practices.",
-    tags: ["React", "React Native", "Node.js"],
+    icon: "MdStorage",
+    title: "Data center & infrastructure",
+    description:
+      "Servers, storage, networking, virtualization, and power — designed for availability you can operate.",
+    tags: ["DC", "Virtualization"],
   },
   {
     id: 5,
-    icon: "MdIntegrationInstructions",
-    title: "API & Integrations",
-    description: "Seamlessly connect your existing tools and platforms with custom API development and third-party integrations.",
-    tags: ["REST", "GraphQL", "Webhooks"],
-  },
-  {
-    id: 6,
-    icon: "MdSupportAgent",
-    title: "Managed IT Support",
-    description: "Reliable, responsive IT support and managed services to keep your systems running at peak performance.",
-    tags: ["24/7", "SLA-backed", "Remote & On-site"],
+    icon: "MdPhone",
+    title: "VoIP & unified communications",
+    description:
+      "Modern IP telephony with platform and handset choices sized to how your organization communicates.",
+    tags: ["VoIP", "UC"],
   },
 ];
 
 export const STATS = [
-  { value: "150+", label: "Projects Delivered" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "12+", label: "Years of Experience" },
-  { value: "40+", label: "Expert Engineers" },
-];
-
-export const TEAM = [
-  { name: "Alexandra Hart", role: "CEO & Co-Founder", initials: "AH" },
-  { name: "Marcus Chen", role: "CTO & Lead Architect", initials: "MC" },
-  { name: "Priya Sharma", role: "Head of Cybersecurity", initials: "PS" },
-  { name: "Daniel Osei", role: "Lead AI Engineer", initials: "DO" },
+  { value: "340+", label: "Projects Delivered" },
+  { value: "97%", label: "Client Satisfaction" },
+  { value: "14+", label: "Years of Experience" },
+  { value: "36+", label: "Expert Engineers" },
 ];

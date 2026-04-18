@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   FaFacebookF,
   FaTwitter,
@@ -38,7 +39,13 @@ const SocialIcon = ({ href, icon: Icon, label }) => (
 );
 
 const Footer = () => {
+  const { t, i18n } = useTranslation();
   const year = new Date().getFullYear();
+
+  const toggleLanguage = () => {
+    const nextLng = i18n.language === "en" ? "ar" : "en";
+    i18n.changeLanguage(nextLng);
+  };
 
   return (
     <footer className="bg-secondary-dark text-white">
@@ -60,7 +67,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-              Empowering businesses with cutting-edge technology solutions that drive growth, efficiency, and digital transformation.
+              {t("footer.description")}
             </p>
             {/* Social icons */}
             <div className="flex items-center gap-2 mt-1">
@@ -74,12 +81,12 @@ const Footer = () => {
           {/* Column 2 — Quick Links */}
           <div>
             <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">
-              Quick Links
+              {t("footer.quick_links")}
             </h4>
             <ul className="flex flex-col gap-3">
               {NAV_LINKS.map((link) => (
                 <FooterLink key={link.path} to={link.path}>
-                  {link.label}
+                  {t(link.label)}
                 </FooterLink>
               ))}
             </ul>
@@ -88,7 +95,7 @@ const Footer = () => {
           {/* Column 3 — Contact */}
           <div>
             <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">
-              Contact Us
+              {t("footer.contact_us")}
             </h4>
             <ul className="flex flex-col gap-4">
               <li className="flex items-start gap-3">
@@ -96,7 +103,10 @@ const Footer = () => {
                 <span className="text-gray-400 text-sm leading-relaxed">{CONTACT_INFO.address}</span>
               </li>
               <li>
-                <a href={`tel:${CONTACT_INFO.phone}`} className="flex items-center gap-3 text-gray-400 hover:text-primary transition-colors text-sm group">
+                <a
+                  href={CONTACT_INFO.phoneTel ? `tel:${CONTACT_INFO.phoneTel}` : `tel:${String(CONTACT_INFO.phone).replace(/[^\d+]/g, "")}`}
+                  className="flex items-center gap-3 text-gray-400 hover:text-primary transition-colors text-sm group"
+                >
                   <HiPhone className="text-primary shrink-0 group-hover:scale-110 transition-transform" size={16} />
                   {CONTACT_INFO.phone}
                 </a>
@@ -116,12 +126,21 @@ const Footer = () => {
       <div className="border-t border-white/5">
         <Container className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-gray-500 text-xs">
-            © {year} <span className="text-gray-400">{SITE_NAME.first}{SITE_NAME.second}</span>. All rights reserved.
+            © {year} <span className="text-gray-400">{SITE_NAME.first}{SITE_NAME.second}</span>. {t("footer.rights")}
           </p>
-          <div className="flex items-center gap-4">
-            <Link to="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Privacy Policy</Link>
+          <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+            <Link to="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">{t("footer.privacy")}</Link>
+            <span className="text-gray-700 hidden sm:inline">·</span>
+            <Link to="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">{t("footer.terms")}</Link>
             <span className="text-gray-700">·</span>
-            <Link to="#" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Terms of Service</Link>
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="text-gray-500 hover:text-primary text-xs font-bold uppercase tracking-wide transition-colors px-1"
+              lang={i18n.language === "en" ? "ar" : "en"}
+            >
+              {i18n.language === "en" ? "العربية" : "English"}
+            </button>
           </div>
         </Container>
       </div>

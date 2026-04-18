@@ -76,4 +76,62 @@
   .glass {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
   }
+
+  .terminal-caret {
+    display: inline-block;
+    width: 0.55ch;
+    transform: translateY(0.08em);
+    border-left: 0.14em solid currentColor;
+    margin-left: 0.08em;
+    animation: terminal-caret-blink 1s steps(1, end) infinite;
+  }
+
+  /* Splash loader — solid block cursor (closer to real terminal / editor caret) */
+  .loader-block-caret {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 0.3em;
+    min-width: 3px;
+    height: 1.12em;
+    margin-left: 0.1em;
+    border-radius: 2px;
+    background-color: currentColor;
+    animation: terminal-caret-blink 1.08s steps(1, end) infinite;
+    vertical-align: -0.06em;
+  }
+}
+
+@keyframes terminal-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Partner logo strip — smooth infinite scroll (paused on hover via class) */
+@keyframes partner-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.partner-marquee-track {
+  animation: partner-marquee 52s linear infinite;
+}
+
+.partner-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee-track {
+    animation: none;
+  }
 }

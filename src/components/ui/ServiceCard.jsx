@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   MdCloudDone,
   MdSecurity,
@@ -6,6 +7,8 @@ import {
   MdDevices,
   MdIntegrationInstructions,
   MdSupportAgent,
+  MdStorage,
+  MdPhone,
 } from "react-icons/md";
 import { HiArrowRight } from "react-icons/hi";
 import Card from "./Card";
@@ -17,18 +20,20 @@ const ICONS = {
   MdDevices,
   MdIntegrationInstructions,
   MdSupportAgent,
+  MdStorage,
+  MdPhone,
 };
 
 export const ServiceCard = ({ service, index = 0, showLearnMore = true }) => {
+  const { t } = useTranslation();
   const Icon = ICONS[service?.icon] || MdCloudDone;
   const isEven = index % 2 === 0;
 
   return (
     <Card className="flex flex-col gap-5 h-full">
       <div
-        className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-md ${
-          isEven ? "bg-primary/10" : "bg-secondary/10"
-        }`}
+        className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-md ${isEven ? "bg-primary/10" : "bg-secondary/10"
+          }`}
       >
         <Icon size={26} className={isEven ? "text-primary" : "text-secondary"} />
       </div>
@@ -55,14 +60,13 @@ export const ServiceCard = ({ service, index = 0, showLearnMore = true }) => {
 
       {showLearnMore && (
         <Link
-          to="/contact"
-          className={`flex items-center gap-1.5 text-sm font-semibold group ${
-            isEven ? "text-primary" : "text-secondary"
-          }`}
+          to={service?.id != null ? `/services/${service.id}` : "/services"}
+          className={`flex items-center gap-1.5 text-sm font-semibold group ${isEven ? "text-primary" : "text-secondary"
+            }`}
         >
-          Learn More
+          {t("common.view_details")}
           <HiArrowRight
-            className="group-hover:translate-x-1 transition-transform duration-200"
+            className="group-hover:translate-x-1 transition-transform duration-200 rtl:rotate-180"
             size={15}
           />
         </Link>
