@@ -107,111 +107,152 @@ const Hero = () => {
   return (
   <section className="relative min-h-screen flex items-center overflow-hidden bg-hero-gradient">
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-primary/10 blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-secondary-light/15 blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-white/2 blur-[100px]" />
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+      <div className="absolute -top-40 -end-32 w-[520px] h-[520px] rounded-full bg-primary/[0.07] blur-[100px]" />
+      <div className="absolute -bottom-48 -start-40 w-[480px] h-[480px] rounded-full bg-secondary/[0.2] blur-[100px]" />
+      <div className="absolute top-[38%] start-1/2 -translate-x-1/2 w-[640px] h-[320px] rounded-full bg-secondary-light/[0.06] blur-[120px]" />
     </div>
 
-    <Container className="relative z-10 pt-28 pb-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14 xl:gap-16 items-center">
-        <Reveal className="max-w-3xl" from="left" distance={22}>
-          <div className="flex flex-wrap gap-3 mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/90 text-sm font-medium backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              {t("home.hero.badge")}
-            </div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/15 border border-primary/35 text-primary text-sm font-semibold backdrop-blur-sm">
-              {t("home.hero.badge_secondary")}
-            </div>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold text-white leading-[1.08] mb-6">
-            {t("home.hero.title_part1")}{" "}
-            <span className="relative block w-fit">
-              <span className="inline-flex items-baseline text-primary font-mono">
-                <span>{text}</span>
-                <span className="terminal-caret" aria-hidden="true" />
+    <Container className="relative z-10 pt-32 pb-24 lg:pt-28">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-10 items-center">
+        {/* ── Left: copy ── */}
+        <div className="lg:col-span-6">
+          <Reveal from="left" distance={22}>
+            <div className="inline-flex items-center gap-2.5 rounded-full glass px-4 py-2 text-sm text-white/85">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              <svg
-                className="absolute -bottom-2 start-0 w-full"
-                viewBox="0 0 300 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2 8.5C50 3.5 100 2 150 5.5C200 9 250 9.5 298 7"
-                  stroke="#F7941D"
-                  strokeWidth="3"
-                  strokeLinecap="round"
+              <span className="font-medium">{t("home.hero.badge")}</span>
+            </div>
+          </Reveal>
+
+          <Reveal from="left" distance={22} delay={0.05}>
+            <h1 className="mt-7 font-display font-extrabold text-white leading-[1.05] text-4xl sm:text-5xl xl:text-6xl">
+              <span className="block">{t("home.hero.title_part1")}</span>
+              <span className="relative mt-2 flex w-fit items-baseline">
+                <span className="gradient-text-warm font-mono">{text}</span>
+                <span className="terminal-caret text-primary" aria-hidden="true" />
+                <svg
+                  className="absolute -bottom-3 start-0 w-full"
+                  viewBox="0 0 300 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 8.5C50 3.5 100 2 150 5.5C200 9 250 9.5 298 7"
+                    stroke="#F7941D"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <span className="mt-2 block">{t("home.hero.title_part2")}</span>
+            </h1>
+          </Reveal>
+
+          <Reveal from="left" distance={22} delay={0.1}>
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/65">
+              {t("home.hero.description")}
+            </p>
+          </Reveal>
+
+          <Reveal from="up" distance={20} delay={0.15}>
+            <div className="mt-9 flex flex-col sm:flex-row gap-4">
+              <Link to="/services">
+                <Button size="lg" variant="primary" className="w-full sm:w-auto group">
+                  {t("home.hero.cta_primary")}
+                  <HiArrowRight className="group-hover:translate-x-1 transition-transform duration-200 rtl:rotate-180" />
+                </Button>
+              </Link>
+              <Link to="/about">
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="w-full sm:w-auto border border-white/25 text-white hover:bg-white/10 hover:text-white"
+                >
+                  {t("home.hero.cta_secondary")}
+                </Button>
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal from="up" distance={16} delay={0.2}>
+            <div className="mt-10 flex items-center gap-4 text-white/45">
+              <span className="h-px w-10 bg-white/20" />
+              <span className="text-xs uppercase tracking-[0.2em]">
+                {t("home.hero.badge_secondary")}
+              </span>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* ── Right: layered showcase ── */}
+        <div className="lg:col-span-6">
+          <Reveal
+            className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-lg lg:ms-auto"
+            delay={0.1}
+            from="right"
+            distance={26}
+          >
+            <div className="relative">
+              <div className="hero-ring absolute -inset-4 rounded-[2.25rem] opacity-50 blur-2xl" aria-hidden="true" />
+
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/5 shadow-2xl ring-1 ring-white/10">
+                {HERO_IMAGES.map((src, i) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt=""
+                    loading={i === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
+                      i === wordIndex ? "opacity-100 z-[2]" : "opacity-0 z-0"
+                    }`}
+                  />
+                ))}
+                <div
+                  className="absolute inset-0 z-[3] bg-gradient-to-t from-[#060b1f]/85 via-[#060b1f]/10 to-transparent pointer-events-none"
+                  aria-hidden="true"
                 />
-              </svg>
-            </span>{" "}
-            {t("home.hero.title_part2")}
-          </h1>
+              </div>
 
-          <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl">
-            {t("home.hero.description")}
-          </p>
+              {/* Floating card — live keyword */}
+              <div className="hero-float absolute top-4 start-4 z-[4] rounded-2xl glass px-5 py-3.5 shadow-xl lg:-start-8">
+                <div className="flex items-center gap-2.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                  </span>
+                  <span className="font-mono text-base font-semibold text-white sm:text-lg">
+                    {text}
+                    <span className="terminal-caret text-primary" aria-hidden="true" />
+                  </span>
+                </div>
+              </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link to="/services">
-              <Button size="lg" variant="primary" className="w-full sm:w-auto group">
-                {t("home.hero.cta_primary")}
-                <HiArrowRight className="group-hover:translate-x-1 transition-transform duration-200 rtl:rotate-180" />
-              </Button>
-            </Link>
-            <Link to="/about">
-              <Button
-                size="lg"
-                variant="ghost"
-                className="w-full sm:w-auto border border-white/30 text-white hover:bg-white/10 hover:text-white"
-              >
-                {t("home.hero.cta_secondary")}
-              </Button>
-            </Link>
-          </div>
-
-          <div className="flex flex-wrap gap-x-6 gap-y-2 mt-10">
-            {TRUST_KEYS.map((key) => (
-              <span key={key} className="flex items-center gap-1.5 text-white/60 text-sm">
-                <HiCheckCircle className="text-primary" size={16} />
-                {t(`home.hero.trust.${key}`)}
-              </span>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal className="relative w-full max-w-xl mx-auto lg:max-w-none lg:mx-0" delay={0.1} from="right" distance={26}>
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/15 bg-white/5 shadow-2xl ring-1 ring-white/10">
-            {HERO_IMAGES.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt=""
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
-                  i === wordIndex ? "opacity-100 z-[2]" : "opacity-0 z-0"
-                }`}
-              />
-            ))}
-            <div
-              className="absolute inset-0 z-[3] bg-gradient-to-t from-secondary-dark/60 via-transparent to-transparent pointer-events-none"
-              aria-hidden="true"
-            />
-          </div>
-          <div className="absolute -bottom-4 -end-4 h-28 w-28 rounded-full bg-primary/25 blur-2xl pointer-events-none" aria-hidden="true" />
-        </Reveal>
+              {/* Floating card — trust checklist */}
+              <div className="hero-float-delayed absolute bottom-4 end-4 z-[4] w-52 rounded-2xl glass p-4 shadow-xl lg:-end-8">
+                <div className="flex flex-col gap-2.5">
+                  {TRUST_KEYS.map((key) => (
+                    <span key={key} className="flex items-center gap-2 text-xs text-white/85">
+                      <HiCheckCircle className="shrink-0 text-primary" size={15} />
+                      {t(`home.hero.trust.${key}`)}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </Container>
+
+    {/* Scroll cue */}
+    <div className="pointer-events-none absolute bottom-6 start-1/2 hidden -translate-x-1/2 rtl:translate-x-1/2 sm:flex">
+      <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/25 p-1">
+        <span className="hero-scroll-dot h-1.5 w-1.5 rounded-full bg-primary" />
+      </span>
+    </div>
 
     <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-background to-transparent" />
   </section>

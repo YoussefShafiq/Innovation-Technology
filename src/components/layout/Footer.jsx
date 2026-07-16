@@ -48,9 +48,16 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-secondary-dark text-white">
+    <footer className="bg-footer-elegant text-white relative overflow-hidden">
+      <div className="footer-accent-line" aria-hidden="true" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[min(720px,90vw)] h-40 rounded-full bg-primary/[0.04] blur-3xl" />
+        <div className="absolute bottom-0 end-0 w-72 h-72 rounded-full bg-secondary/15 blur-3xl" />
+        <div className="absolute bottom-1/4 start-0 w-56 h-56 rounded-full bg-secondary-light/5 blur-3xl" />
+      </div>
+
       {/* Main footer */}
-      <Container className="py-14 lg:py-16">
+      <Container className="relative z-10 py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
 
           {/* Column 1 — Brand */}
@@ -123,7 +130,7 @@ const Footer = () => {
       </Container>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/5">
+      <div className="relative z-10 border-t border-white/[0.06]">
         <Container className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-gray-500 text-xs">
             © {year} <span className="text-gray-400">{SITE_NAME.first}{SITE_NAME.second}</span>. {t("footer.rights")}
